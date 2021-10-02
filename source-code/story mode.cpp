@@ -29,7 +29,7 @@ int story_mode(int savepoint)
 				100, 100, 100,
 				100, 100, 100,
 				20, 20, 20, 20,
-				"铁质匕首",
+				"铁剑",
 				"",
 				"",
 				"皮质胸甲",
@@ -58,6 +58,8 @@ int story_mode(int savepoint)
 			}
 		}
 		cout << "你通关了！";
+		quit_story_mode = true;
+		cin.get();
 	}
 	return 0;
 }

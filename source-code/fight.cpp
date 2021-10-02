@@ -201,7 +201,7 @@ int AI_attack(entity* p_red, entity* p_blue)
         bool attacking = true;
         while (attacking == true)
         {
-            cout << red.name << "手持" << red.weapon << "挥向" << blue.name << "……\n";
+            cout << red.name << "使用" << red.weapon << "挥向" << blue.name << "……\n";
             Sleep(2000);
             red.SP -= 8 * weapon_choosing(red.weapon).weight;  // 进攻者耐力减少
             blue.SP -= blue_weight;  // 躲闪者耐力减少

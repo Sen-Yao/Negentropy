@@ -19,6 +19,7 @@ struct entity
 struct weapon
 {
     string name;
+    string description;
     int damage;
     int weight;
     int value;

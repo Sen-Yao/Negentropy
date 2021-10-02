@@ -9,6 +9,7 @@ weapon weapon_choosing(string weapon_name)
 	weapon iron_dagger =
 	{
 		"ÌúÖÊØ°Ê×",
+		"",
 		15,
 		4,
 		20,
@@ -21,6 +22,7 @@ weapon weapon_choosing(string weapon_name)
 	weapon iron_sword =
 	{
 		"Ìú½£",
+		"£¨Ìú½£µÄÃèÊö£©",
 		50,
 		7,
 		50,
@@ -33,6 +35,7 @@ weapon weapon_choosing(string weapon_name)
 	weapon wolf_claw =
 	{
 		"ÀÇ×¦",
+		"",
 		10,
 		4,
 		10,
