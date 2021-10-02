@@ -13,8 +13,8 @@ weapon weapon_choosing(string weapon_name);
 bool story1(entity player)
 {
 	// -----叙事开始------
+	system("cls");
 	cout << "序章……" << endl;
-	Sleep(1000);
 	cin.get();
 	cout << "(使用回车继续剧情）" << endl;
 	cin.get();
@@ -102,6 +102,8 @@ bool story1(entity player)
 	cin.get();
 	cout << "你深吸一口气，拔出了铁剑。" << endl;
 	cin.get();
+	cout << "战斗加载中……" << endl;
+	Sleep(2000);
 
 	bool battle_ans = batte_player(player, entity_choosing("野狼"));
 	if (battle_ans == false)
@@ -136,7 +138,7 @@ bool story1(entity player)
 	cin.get();
 	cout << "简单埋葬完野狼的尸体，你顺着脚印继续前进。" << endl;
 	cin.get();
-	cout << "1003剧情结束" << endl;
+	cout << "（debug:第一关剧情结束）" << endl;
 	cin.get();
 	return true;
 }

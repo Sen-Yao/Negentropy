@@ -11,10 +11,29 @@ using namespace std;
 
 int story_mode(int storypoint);
 int freefight();
-
+int printlogo()
+{
+    cout << "    ######################        ####            ####  ####  \n";
+    cout << "    ######################        ####            ####    ##  \n";
+    cout << "    ####              ####        ####    ####################\n";
+    cout << "    ####              ####        ####    ####################\n";
+    cout << "    ######################      ########          ####        \n";
+    cout << "    ##                    ####  ########  ######  ####        \n";
+    cout << "    ##########################    ####    ######  ####  ####  \n";
+    cout << "      ######################      ####    ##  ##  ####  ####  \n";
+    cout << "        ####        ####          ####    ######  ####  ##    \n";
+    cout << "##############################    ####    ######    ##  ##    \n";
+    cout << "##############################    ######            ######    \n";
+    cout << "        ####        ####        ########      ####  ####    ##\n";
+    cout << "      ####          ####        ####    ##########  ######  ##\n";
+    cout << "  ######            ####                ####      ####  ######\n";
+    cout << "  ####              ####                        ####      ####\n";
+    cout << "\n\n\n\n\n\n\n                                                      当前版本：beta1004\n\n\n";
+    return 0;
+}
 int main()
 {
-    cout << "欢迎来到《异域》" << endl << endl;
+    printlogo();
     cout << "1.剧情模式\n2.自由模式\n3.退出游戏\n";
     int game_choice1_1 = _getch();
     while (game_choice1_1 != 49 && game_choice1_1 != 50 && game_choice1_1 != 51)
@@ -22,20 +41,25 @@ int main()
     if (game_choice1_1 == 49)
     {
         int game_choice2_1 = 0;
+        system("cls");
+        printlogo();
         cout << "\n1.继续游戏\n2.新游戏\n3.返回（功能未实现）\n";
         while (game_choice2_1 != 49 && game_choice2_1 != 50 && game_choice2_1 != 51)
             game_choice2_1 = _getch();
         if (game_choice2_1 == 49)
         {
+            system("cls");
             int savepoint = 0;
             ifstream in("./saves\\save.txt");
             in >> savepoint;
             story_mode(savepoint);
         }
         if (game_choice2_1 == 50)
+            system("cls");
             story_mode(0);
         return 0;
     }
     if (game_choice1_1 == 50)
+        system("cls");
         freefight();
 }

@@ -307,6 +307,7 @@ int AI_attack(entity* p_red, entity* p_blue)
 
 bool batte_player(entity player, entity enemy)
 {
+    system("cls");
     // 随机数生成器
     srand(long(time(0)));
 
@@ -394,6 +395,13 @@ bool batte_player(entity player, entity enemy)
                 win = false;
             }
         }
+    }
+    if (win == true);
+    {
+        cout << "按下Enter继续！";
+        cin.get();
+        Sleep(1000);
+        system("cls");
     }
     return win;
 }

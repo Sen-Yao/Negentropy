@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <fstream>
 #include <iomanip>
+#include <direct.h>
 #include "struct.h"
 using namespace std;
 
@@ -18,6 +19,8 @@ entity load();
 
 int story_mode(int savepoint)
 {
+	string save_path = "./saves";
+	_mkdir(save_path.c_str());
 	bool quit_story_mode = false;
 	while (quit_story_mode == false)
 	{
@@ -61,5 +64,5 @@ int story_mode(int savepoint)
 		quit_story_mode = true;
 		cin.get();
 	}
-	return 0;
+	return 0;	
 }

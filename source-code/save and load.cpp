@@ -13,7 +13,7 @@ int save(entity player, int savepoint)
 {
 	cout << "\n×Ô¶¯´æµµÖĞ¡­¡­\n";
 	ofstream out("./saves\\save.txt");
-	out << savepoint
+	out << savepoint << endl
 		<< player.name << endl
 		<< player.HP << " " << player.MP << " " << player.SP << endl
 		<< player.max_HP << " " << player.max_MP << " " << player.max_SP << endl

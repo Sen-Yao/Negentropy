@@ -20,6 +20,7 @@ struct weapon
 {
     string name;
     string description;
+    string type;
     int damage;
     int weight;
     int value;
