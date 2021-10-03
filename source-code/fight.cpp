@@ -12,6 +12,8 @@ using namespace std;
 entity entity_choosing(string entity_name);
 weapon weapon_choosing(string weapon_name);
 armor armor_choosing(string armor_name);
+int printlogo();
+
 float calculate_dodge_chance(entity red, entity blue)
 {
     int blue_weight = armor_choosing(blue.helmet).weight + armor_choosing(blue.armor).weight
@@ -30,6 +32,60 @@ float calculate_dodge_chance(entity red, entity blue)
     return dodge_chance;
     
 }
+int AI_decision(entity* p_red, entity* p_blue)
+{
+    int action;
+    entity red = *p_red;
+    entity blue = *p_blue;
+
+    float dodge_chance = calculate_dodge_chance(red, blue);
+
+    if (red.courage == 0)
+        action = 53;
+    if (red.courage == 1)
+    {
+        if (red.HP <= 0.5 * red.max_HP)
+            action = 53;
+        else if ((1 - dodge_chance) > 0.8 || red.SP == red.max_SP)
+            action = 49;
+        else
+            action = 51;
+    }
+
+    if (red.courage == 2)
+    {
+        if (red.HP <= 0.3 * red.max_HP)
+            action = 53;
+        else if ((1 - dodge_chance) > 0.5 || red.SP > 0.8 * red.max_SP)
+            action = 49;
+        else
+            action = 51;
+    }
+
+    if (red.courage == 3)
+    {
+        if (red.HP <= 0.2 * red.max_HP)
+        {
+            action = 53;
+            if (blue.HP - weapon_choosing(red.weapon).damage <= 0)
+                action = 49;
+        }
+        else if ((1 - dodge_chance) > 0.3 || red.SP > 0.5 * red.max_SP)
+            action = 49;
+        else
+            action = 51;
+    }
+
+    if (red.courage == 4)
+    {
+        if ((1 - dodge_chance) > 0.3 || red.SP > 0.5 * red.max_SP)
+            action = 49;
+        else
+            action = 51;
+        
+    }
+    return action;
+}
 int player_attack(entity* p_player, entity* p_enemy)
 {
     int result = 0;
@@ -38,6 +94,10 @@ int player_attack(entity* p_player, entity* p_enemy)
 
     int enemy_weight = armor_choosing(enemy.helmet).weight + armor_choosing(enemy.armor).weight
         + armor_choosing(enemy.gauntlet).weight + armor_choosing(enemy.boot).weight;
+
+    int enemy_protection = armor_choosing(enemy.helmet).protection + armor_choosing(enemy.armor).protection
+        + armor_choosing(enemy.gauntlet).protection + armor_choosing(enemy.boot).protection;
+
     float dodge_chance = calculate_dodge_chance(player, enemy);
     
     cout << "\n\n你的回合！\n"
@@ -83,7 +143,7 @@ int player_attack(entity* p_player, entity* p_enemy)
             {
                 // 计算伤害并扣血
                 float damage;
-                damage = weapon_choosing(player.weapon).damage + float((rand() % 100)) / 10;
+                damage = (weapon_choosing(player.weapon).damage + float((rand() % 100)) / 10) * (float(100 - enemy_protection) / 100.0);
                 enemy.HP -= int(damage);
                 if (enemy.HP > 0)
                 {
@@ -129,7 +189,7 @@ int player_attack(entity* p_player, entity* p_enemy)
                 {
                     result = 1;
                     attacking = false;
-                    cout << player.name << "造成了" << damage << "点伤害！杀死了" << enemy.name << "\n！战斗胜利！\n";
+                    cout << player.name << "造成了" << damage << "点伤害！杀死了" << enemy.name << "！";
                 }
 
             }
@@ -171,30 +231,23 @@ int AI_attack(entity* p_red, entity* p_blue)
 
     entity red = *p_red;
     entity blue = *p_blue;
-
+    
     int blue_weight = armor_choosing(blue.helmet).weight + armor_choosing(blue.armor).weight
         + armor_choosing(blue.gauntlet).weight + armor_choosing(blue.boot).weight;
+
+    int blue_protection = armor_choosing(blue.helmet).protection + armor_choosing(blue.armor).protection
+        + armor_choosing(blue.gauntlet).protection + armor_choosing(blue.boot).protection;
+
     float dodge_chance = calculate_dodge_chance(red, blue);
+
+
     cout << red.name << "的回合开始。" << endl;
     Sleep(1500);
     cout << red.name << " 正在思考应对 " << blue.name << " 的战略……" << endl << endl;
     Sleep(1500);
 
-    int action;
-    // AI判定
-    // AI：先判断自身安危，考虑逃跑
-    if (red.HP <= 0.3 * red.max_HP)
-        // AI：也有可能双双残局，会愿意拼死一搏
-        if (blue.HP < 0.2 * blue.max_HP)
-            action = 49;
-        else
-            action = 53;
-    // AI：再判断命中率大不大
-    else if ((1 - dodge_chance) > 0.5 || red.SP > 0.8 * red.max_SP)
-        action = 49;
-    else
-        action = 51;
-    
+    int action = AI_decision(p_red, p_blue);
+
     // 根据AI的意思来执行指令
     if (action == 49)
     {
@@ -221,7 +274,7 @@ int AI_attack(entity* p_red, entity* p_blue)
             {
                 cout << "连击！" << endl;
                 float damage;
-                damage = weapon_choosing(red.weapon).damage + float((rand() % 100)) / 10;
+                damage = (weapon_choosing(red.weapon).damage + float((rand() % 100)) / 10) * (float(100 - blue_protection) / 100.0);
                 blue.HP -= int(damage);
                 if (blue.HP > 0)
                 {
@@ -268,9 +321,16 @@ int AI_attack(entity* p_red, entity* p_blue)
     if (action == 53)
     {
         cout << red.name << " 见机不妙，试图逃跑！" << endl;
-        cout << blue.name << "试图追击……" << endl;
-        float dodge_chance = calculate_dodge_chance(blue, red);
-        cout << "命中率为" << (1 - dodge_chance) * 100 << "%\n" << endl;
+        if (blue.courage >= 2)
+        {
+            cout << blue.name << "试图追击……" << endl;
+            float dodge_chance = calculate_dodge_chance(blue, red);
+            cout << "命中率为" << (1 - dodge_chance) * 100 << "%\n" << endl;
+        }
+        else
+        {
+            cout << blue.name << "决定放走" << red.name << endl;
+        }
 
 
         Sleep(1000);
@@ -307,6 +367,10 @@ int AI_attack(entity* p_red, entity* p_blue)
 
 bool batte_player(entity player, entity enemy)
 {
+    system("cls");
+    printlogo();
+    cout << "战斗加载中……";
+    Sleep(2000);
     system("cls");
     // 随机数生成器
     srand(long(time(0)));
@@ -367,7 +431,6 @@ bool batte_player(entity player, entity enemy)
             entity* p_blue = &player;
             int result = AI_attack(p_red, p_blue);
 
-
             if (result == 1)
             {
                 win = false;
@@ -398,7 +461,7 @@ bool batte_player(entity player, entity enemy)
     }
     if (win == true);
     {
-        cout << "按下Enter继续！";
+        cout << "\n按下Enter继续！";
         cin.get();
         Sleep(1000);
         system("cls");

@@ -16,32 +16,356 @@ bool batte_player(entity player, entity enemy);
 
 int freefight()
 {
-    int entity_selection;
     entity player, enemy;
 
     // 角色选择
-    cout << "选择你的角色！\n1.士兵\n2.强盗\n";
-    entity_selection = _getch();
+    cout << "选择你的角色！\n1.士兵\n2.强盗\n3.野狼\n";
+    int entity_selection = _getch();
+    while (entity_selection != 49 && entity_selection != 50 && entity_selection != 51)
+    {
+        entity_selection = _getch();
+    }
+    system("cls");
     if (entity_selection == 49)
         player = entity_choosing("士兵");
     if (entity_selection == 50)
         player = entity_choosing("强盗");
+    if (entity_selection == 51)
+        player = entity_choosing("野狼");
 
     cout << "你将扮演" << player.name << endl;
-    Sleep(500);
 
-    cout << "\n选择你的敌人！\n1.士兵\n2.强盗\n";
+    if (player.human == true)
+    {
+        bool player_weapon_choosing = false;
+        while (player_weapon_choosing == false)
+        {
+            system("cls");
+            cout << "您当前选择的武器是" << player.weapon
+                << "，它的伤害为 " << weapon_choosing(player.weapon).damage
+                << "，重量为 " << weapon_choosing(player.weapon).weight
+                << "\n使用这把武器？\n1.是\n2.否\n";
+            int player_weapon_change_1 = _getch();
+            while (player_weapon_change_1 != 49 && player_weapon_change_1 != 50)
+                player_weapon_change_1 = _getch();
+            if (player_weapon_change_1 == 49)
+                break;
+            system("cls");
+
+            cout << "是否更换武器？\n1.是\n2.否\n";
+            player_weapon_change_1 = _getch();
+            while (player_weapon_change_1 != 49 && player_weapon_change_1 != 50)
+                player_weapon_change_1 = _getch();
+            if (player_weapon_change_1 == 49)
+            {
+                system("cls");
+                cout << "武器类型检索\n1.单手武器\n2.双手武器\n";
+                int player_weapon_change_2 = _getch();
+                while (player_weapon_change_2 != 49 && player_weapon_change_2 != 50)
+                {
+                    player_weapon_change_2 = _getch();
+                }
+                system("cls");
+                if (player_weapon_change_2 == 49)
+                {
+                    cout << "1.单手剑\n2.单手斧\n3.单手锤\n4.匕首\n";
+                    int player_weapon_change_3 = _getch();
+                    while (player_weapon_change_3 != 49 && player_weapon_change_3 != 50 && player_weapon_change_3 != 51 && player_weapon_change_3 != 52)
+                    {
+                        player_weapon_change_3 = _getch();
+                    }
+                    system("cls");
+                    if (player_weapon_change_3 == 49)
+                    {
+                        cout << "1.铁剑\n2.钢剑\n3.精制军团剑";
+                        int player_weapon_change_3 = _getch();
+                        while (player_weapon_change_3 != 49 && player_weapon_change_3 != 50 && player_weapon_change_3 != 51)
+                        {
+                            player_weapon_change_3 = _getch();
+                        }
+                        system("cls");
+                        if (player_weapon_change_3 == 49)
+                            player.weapon = "铁剑";
+                        if (player_weapon_change_3 == 50)
+                            player.weapon = "钢剑";
+                        if (player_weapon_change_3 == 51)
+                            player.weapon = "精制军团剑";
+                    }
+                    if (player_weapon_change_3 == 50)
+                    {
+                        cout << "1.铁斧\n2.双头斧\n";
+                        int player_weapon_change_3 = _getch();
+                        while (player_weapon_change_3 != 49 && player_weapon_change_3 != 50 && player_weapon_change_3 != 51)
+                        {
+                            player_weapon_change_3 = _getch();
+                        }
+                        system("cls");
+                        if (player_weapon_change_3 == 49)
+                            player.weapon = "铁斧";
+                        if (player_weapon_change_3 == 50)
+                            player.weapon = "双头斧";
+                    }
+                    if (player_weapon_change_3 == 51)
+                    {
+                        cout << "1.铁锤\n";
+                        int player_weapon_change_3 = _getch();
+                        while (player_weapon_change_3 != 49 && player_weapon_change_3 != 50 && player_weapon_change_3 != 51)
+                        {
+                            player_weapon_change_3 = _getch();
+                        }
+                        system("cls");
+                        if (player_weapon_change_3 == 49)
+                            player.weapon = "铁锤";
+
+
+                    }
+                    if (player_weapon_change_3 == 52)
+                    {
+                        cout << "1.铁质匕首\n2.钢制匕首\n3.暗影匕首";
+                        int player_weapon_change_3 = _getch();
+                        while (player_weapon_change_3 != 49 && player_weapon_change_3 != 50 && player_weapon_change_3 != 51)
+                        {
+                            player_weapon_change_3 = _getch();
+                        }
+                        system("cls");
+                        if (player_weapon_change_3 == 49)
+                            player.weapon = "铁质匕首";
+                        if (player_weapon_change_3 == 50)
+                            player.weapon = "钢制匕首";
+                        if (player_weapon_change_3 == 51)
+                            player.weapon = "暗影匕首";
+                    }
+                }
+                if (player_weapon_change_2 == 50)
+                {
+                    cout << "1.双手剑\n2.双手斧\n3.双手锤\n";
+                    int player_weapon_change_3 = _getch();
+                    while (player_weapon_change_3 != 49 && player_weapon_change_3 != 50 && player_weapon_change_3 != 51)
+                    {
+                        player_weapon_change_3 = _getch();
+                    }
+                    system("cls");
+                    if (player_weapon_change_3 == 49)
+                    {
+                        cout << "1.铁质大剑\n";
+                        int player_weapon_change_3 = _getch();
+                        while (player_weapon_change_3 != 49)
+                        {
+                            player_weapon_change_3 = _getch();
+                        }
+                        system("cls");
+                        if (player_weapon_change_3 == 49)
+                            player.weapon = "铁质大剑";
+                    }
+                    if (player_weapon_change_3 == 50)
+                    {
+                        cout << "1.斩首斧\n2.斩斧\n3.杀戮巨斧\n";
+                        int player_weapon_change_3 = _getch();
+                        while (player_weapon_change_3 != 49 && player_weapon_change_3 != 50 && player_weapon_change_3 != 51)
+                        {
+                            player_weapon_change_3 = _getch();
+                        }
+                        system("cls");
+                        if (player_weapon_change_3 == 49)
+                            player.weapon = "斩首斧";
+                        if (player_weapon_change_3 == 50)
+                            player.weapon = "斩斧";
+                        if (player_weapon_change_3 == 51)
+                            player.weapon = "杀戮巨斧";
+                    }
+                    if (player_weapon_change_3 == 51)
+                    {
+                        cout << "1.帝国重锤\n";
+                        int player_weapon_change_3 = _getch();
+                        while (player_weapon_change_3 != 49)
+                        {
+                            player_weapon_change_3 = _getch();
+                        }
+                        system("cls");
+                        if (player_weapon_change_3 == 49)
+                            player.weapon = "帝国重锤";
+
+
+                    }
+                }
+            }
+            if (player_weapon_change_1 == 50)
+                break;
+        }
+        
+    }
+
+    system("cls");
+    cout << "选择你的敌人！\n1.士兵\n2.强盗\n3.野狼";
     entity_selection = _getch();
     if (entity_selection == 49)
         enemy = entity_choosing("士兵");
     if (entity_selection == 50)
         enemy = entity_choosing("强盗");
-    cout << "你将要面对" << enemy.name << endl;
+    if (entity_selection == 51)
+        enemy = entity_choosing("野狼");
 
-    Sleep(500);
-    cout << "请输入您的昵称：";
-    cin >> player.name;
-    cout << player.name << "，欢迎来到战斗！" << endl;
+    if (enemy.human == true)
+    {
+        bool enemy_weapon_choosing = false;
+        while (enemy_weapon_choosing == false)
+        {
+            system("cls");
+            cout << "敌人当前选择的武器是" << enemy.weapon
+                << "，它的伤害为 " << weapon_choosing(enemy.weapon).damage
+                << "，重量为 " << weapon_choosing(enemy.weapon).weight
+                << "\n让敌人使用这把武器？\n1.是\n2.否\n";
+            int enemy_weapon_change_1 = _getch();
+            while (enemy_weapon_change_1 != 49 && enemy_weapon_change_1 != 50)
+                enemy_weapon_change_1 = _getch();
+            if (enemy_weapon_change_1 == 49)
+                break;
+            system("cls");
+            cout << "是否更换武器？\n1.是\n2.否\n";
+            enemy_weapon_change_1 = _getch();
+            while (enemy_weapon_change_1 != 49 && enemy_weapon_change_1 != 50)
+                enemy_weapon_change_1 = _getch();
+            if (enemy_weapon_change_1 == 49)
+            {
+                system("cls");
+                cout << "武器类型检索\n1.单手武器\n2.双手武器\n";
+                int enemy_weapon_change_2 = _getch();
+                while (enemy_weapon_change_2 != 49 && enemy_weapon_change_2 != 50)
+                {
+                    enemy_weapon_change_2 = _getch();
+                }
+                system("cls");
+                if (enemy_weapon_change_2 == 49)
+                {
+                    cout << "1.单手剑\n2.单手斧\n3.单手锤\n4.匕首\n";
+                    int enemy_weapon_change_3 = _getch();
+                    while (enemy_weapon_change_3 != 49 && enemy_weapon_change_3 != 50 && enemy_weapon_change_3 != 51 && enemy_weapon_change_3 != 52)
+                    {
+                        enemy_weapon_change_3 = _getch();
+                    }
+                    system("cls");
+                    if (enemy_weapon_change_3 == 49)
+                    {
+                        cout << "1.铁剑\n2.钢剑\n3.精制军团剑";
+                        int enemy_weapon_change_3 = _getch();
+                        while (enemy_weapon_change_3 != 49 && enemy_weapon_change_3 != 50 && enemy_weapon_change_3 != 51)
+                        {
+                            enemy_weapon_change_3 = _getch();
+                        }
+                        system("cls");
+                        if (enemy_weapon_change_3 == 49)
+                            enemy.weapon = "铁剑";
+                        if (enemy_weapon_change_3 == 50)
+                            enemy.weapon = "钢剑";
+                        if (enemy_weapon_change_3 == 51)
+                            enemy.weapon = "精制军团剑";
+                    }
+                    if (enemy_weapon_change_3 == 50)
+                    {
+                        cout << "1.铁斧\n2.双头斧\n";
+                        int enemy_weapon_change_3 = _getch();
+                        while (enemy_weapon_change_3 != 49 && enemy_weapon_change_3 != 50 && enemy_weapon_change_3 != 51)
+                        {
+                            enemy_weapon_change_3 = _getch();
+                        }
+                        system("cls");
+                        if (enemy_weapon_change_3 == 49)
+                            enemy.weapon = "铁斧";
+                        if (enemy_weapon_change_3 == 50)
+                            enemy.weapon = "双头斧";
+                    }
+                    if (enemy_weapon_change_3 == 51)
+                    {
+                        cout << "1.铁锤\n";
+                        int enemy_weapon_change_3 = _getch();
+                        while (enemy_weapon_change_3 != 49 && enemy_weapon_change_3 != 50 && enemy_weapon_change_3 != 51)
+                        {
+                            enemy_weapon_change_3 = _getch();
+                        }
+                        system("cls");
+                        if (enemy_weapon_change_3 == 49)
+                            enemy.weapon = "铁锤";
+
+
+                    }
+                    if (enemy_weapon_change_3 == 52)
+                    {
+                        cout << "1.铁质匕首\n2.钢制匕首\n3.暗影匕首";
+                        int enemy_weapon_change_3 = _getch();
+                        while (enemy_weapon_change_3 != 49 && enemy_weapon_change_3 != 50 && enemy_weapon_change_3 != 51)
+                        {
+                            enemy_weapon_change_3 = _getch();
+                        }
+                        system("cls");
+                        if (enemy_weapon_change_3 == 49)
+                            enemy.weapon = "铁质匕首";
+                        if (enemy_weapon_change_3 == 50)
+                            enemy.weapon = "钢制匕首";
+                        if (enemy_weapon_change_3 == 51)
+                            enemy.weapon = "暗影匕首";
+                    }
+                }
+                if (enemy_weapon_change_2 == 50)
+                {
+                    cout << "1.双手剑\n2.双手斧\n3.双手锤\n";
+                    int enemy_weapon_change_3 = _getch();
+                    while (enemy_weapon_change_3 != 49 && enemy_weapon_change_3 != 50 && enemy_weapon_change_3 != 51)
+                    {
+                        enemy_weapon_change_3 = _getch();
+                    }
+                    system("cls");
+                    if (enemy_weapon_change_3 == 49)
+                    {
+                        cout << "1.铁质大剑\n";
+                        int enemy_weapon_change_3 = _getch();
+                        while (enemy_weapon_change_3 != 49)
+                        {
+                            enemy_weapon_change_3 = _getch();
+                        }
+                        system("cls");
+                        if (enemy_weapon_change_3 == 49)
+                            enemy.weapon = "铁质大剑";
+                    }
+                    if (enemy_weapon_change_3 == 50)
+                    {
+                        cout << "1.斩首斧\n2.斩斧\n3.杀戮巨斧\n";
+                        int enemy_weapon_change_3 = _getch();
+                        while (enemy_weapon_change_3 != 49 && enemy_weapon_change_3 != 50 && enemy_weapon_change_3 != 51)
+                        {
+                            enemy_weapon_change_3 = _getch();
+                        }
+                        system("cls");
+                        if (enemy_weapon_change_3 == 49)
+                            enemy.weapon = "斩首斧";
+                        if (enemy_weapon_change_3 == 50)
+                            enemy.weapon = "斩斧";
+                        if (enemy_weapon_change_3 == 51)
+                            enemy.weapon = "杀戮巨斧";
+                    }
+                    if (enemy_weapon_change_3 == 51)
+                    {
+                        cout << "1.帝国重锤\n";
+                        int enemy_weapon_change_3 = _getch();
+                        while (enemy_weapon_change_3 != 49)
+                        {
+                            enemy_weapon_change_3 = _getch();
+                        }
+                        system("cls");
+                        if (enemy_weapon_change_3 == 49)
+                            enemy.weapon = "帝国重锤";
+
+
+                    }
+                }
+            }
+            if (enemy_weapon_change_1 == 50)
+                break;
+        }
+
+    }
+    system("cls");
+    cout << "你将要面对" << enemy.name << endl;
+    Sleep(2000);
 
     batte_player(player, enemy);
 

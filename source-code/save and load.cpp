@@ -34,6 +34,7 @@ entity load()
 	entity player =
 	{
 		"player1",
+		true,
 		120, 100, 120,
 		120, 100, 120,
 		20, 20, 20, 20,

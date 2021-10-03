@@ -9,6 +9,7 @@ entity entity_choosing(string entity_name)
 	entity bandit =
 	{
 		"Ç¿µÁ",
+		true,
 		120, 100, 120,
 		120, 100, 120,
 		30, 20, 20, 30,
@@ -18,6 +19,7 @@ entity entity_choosing(string entity_name)
 		"Æ¤ÖÊÐØ¼×",
 		"",
 		"",
+		3,
 	};
 	if (entity_name == bandit.name)
 	{
@@ -26,6 +28,7 @@ entity entity_choosing(string entity_name)
 	entity soilder =
 	{
 		"Ê¿±ø",
+		true,
 		120, 100, 120,
 		120, 100, 120,
 		40, 30, 40, 20,
@@ -35,6 +38,7 @@ entity entity_choosing(string entity_name)
 		"ÌúÖÊÐØ¼×",
 		"",
 		"",
+		2,
 	};
 	if (entity_name == soilder.name)
 	{
@@ -44,6 +48,7 @@ entity entity_choosing(string entity_name)
 	entity wolf =
 	{
 		"Ò°ÀÇ",
+		false,
 		60, 0, 100,
 		60, 0, 100,
 		30, 0, 20, 30,
@@ -53,6 +58,7 @@ entity entity_choosing(string entity_name)
 		"",
 		"",
 		"",
+		4,
 	};
 	if (entity_name == wolf.name)
 		ans_entity = wolf;

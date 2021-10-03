@@ -29,6 +29,7 @@ int story_mode(int savepoint)
 			entity player =
 			{
 				"player",
+				true,
 				100, 100, 100,
 				100, 100, 100,
 				20, 20, 20, 20,
