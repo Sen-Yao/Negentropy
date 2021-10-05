@@ -132,6 +132,8 @@ bool story1(entity player)
 	cin.get();
 	cout << "你抓起野狼的尸体，准备将其挪入路边的枯木丛。" << endl;
 	cin.get();
+	cout << "拨开枯木丛，一串模糊的脚印显现在雪地上。" << endl;
+	cin.get();
 	cout << "大雪封山数日，一般人根本不会想着进山。" << endl;
 	cin.get();
 	cout << "说不定会是父亲…" << endl;

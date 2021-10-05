@@ -1,4 +1,3 @@
-// 仅仅是一个1v1战斗的测试，功能还得随着c++的学习慢慢完善
 #include <iostream>
 #include <string>
 #include <time.h>

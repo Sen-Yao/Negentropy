@@ -24,6 +24,7 @@ int story_mode(int savepoint)
 	bool quit_story_mode = false;
 	while (quit_story_mode == false)
 	{
+
 		if (savepoint == 0)
 		{
 			entity player =

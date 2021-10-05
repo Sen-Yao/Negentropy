@@ -18,8 +18,10 @@ entity entity_choosing(string entity_name)
 		"",
 		"Æ¤ÖÊĞØ¼×",
 		"",
-		"",
+		"Æ¤Ñ¥",
 		3,
+		false,
+		true,
 	};
 	if (entity_name == bandit.name)
 	{
@@ -37,8 +39,10 @@ entity entity_choosing(string entity_name)
 		"",
 		"ÌúÖÊĞØ¼×",
 		"",
-		"",
+		"ÌúÑ¥",
 		2,
+		false,
+		false,
 	};
 	if (entity_name == soilder.name)
 	{
@@ -59,6 +63,8 @@ entity entity_choosing(string entity_name)
 		"",
 		"",
 		4,
+		false,
+		true,
 	};
 	if (entity_name == wolf.name)
 		ans_entity = wolf;
